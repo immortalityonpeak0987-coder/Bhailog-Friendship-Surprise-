@@ -860,7 +860,12 @@ export default function App() {
         body: JSON.stringify({ friend_name: friendName, mood, memory, vibe, sender_gender: senderGender, language })
       });
       
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        throw new Error("Server returned an invalid response. This might be a deployment issue or missing API keys.");
+      }
       
       if (!response.ok) {
         throw new Error(data.error || "Failed to generate");
@@ -881,7 +886,7 @@ export default function App() {
       
     } catch (err) {
       console.error(err);
-      alert("Error generating memory. Please try again.");
+      alert(err.message || "Error generating memory. Please try again.");
     } finally {
       setIsGenerating(false);
     }

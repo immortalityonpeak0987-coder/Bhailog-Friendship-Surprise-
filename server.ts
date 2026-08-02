@@ -23,7 +23,7 @@ if (process.env.GEMINI_API_KEY) {
 app.post("/api/generate", async (req, res) => {
   try {
     if (!ai) {
-      return res.status(500).json({ error: "Gemini API key is missing. Please add it to your secrets." });
+      return res.status(500).json({ error: "Gemini API key is missing. Please add it to your Vercel Environment Variables." });
     }
     
     const { friend_name, mood, memory, vibe, sender_gender, language } = req.body;
@@ -150,4 +150,4 @@ if (!process.env.VERCEL) {
   });
 }
 
-export default app;
+module.exports = app;

@@ -23,7 +23,7 @@ export default async function handler(req: any, res: any) {
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return res.status(500).json({ error: 'Server misconfiguration: GEMINI_API_KEY is missing.' });
+      return res.status(500).json({ error: 'Gemini API key is missing. Please add it to your Vercel Environment Variables.' });
     }
 
     const ai = new GoogleGenAI({ apiKey });
